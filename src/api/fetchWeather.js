@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (url) => {
+const useFetchWeather = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -24,4 +24,4 @@ const useFetch = (url) => {
   return { data, error };
 };
 
-export default useFetch;
+export default useFetchWeather;

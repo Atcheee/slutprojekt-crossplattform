@@ -1,22 +1,19 @@
 import React from "react";
-import useFetch from "../../api/index";
+import useFetchWeather from "../../api/fetchWeather";
+import useFetchDepartures from "../../api/fetchDepartures";
+import Clock from "./clock/Clock";
 
 function Body() {
-  const { data: weather } = useFetch(
+  const { data: weather } = useFetchWeather(
     "https://api.openweathermap.org/data/2.5/weather?q=Stockholm,se&APPID=11ef9b177cbdb59d6895c31723f02320"
   );
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
-
-  const today = new Date();
-  const curTime = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds(); // add useState
+  const { data: departure } = useFetchDepartures(
+    "https://api.resrobot.se/v2.1/departureBoard?id=740000002&format=json&accessId=644710bc-1d39-4371-b149-6b7a6f0c9cdd"
+  );
 
   return (
     <div>
-      <h1>Current date is {date}</h1>
-      <h1>Current time is {curTime}</h1>
+      <h1><Clock /></h1>
       <h1> Country: {weather && weather.name} </h1>
       <h1>
         {" "}
