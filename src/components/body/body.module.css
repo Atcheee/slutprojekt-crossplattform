@@ -1,0 +1,90 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 90vh;
+  justify-content: center;
+}
+
+.wrapper h1 {
+  color: white;
+}
+
+.clock_timer {
+  border: 1px solid white;
+  padding: 15px;
+}
+
+.dog_images {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+}
+
+.dog_images img {
+  max-height: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .clock {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .weather_container {
+    grid-area: 2 / 1 / 3 / 2;
+    display: grid;
+    justify-content: center;
+  }
+  .dog_images {
+    grid-area: 1 / 2 / 3 / 3;
+    width: 100vh;
+    object-fit: fill;
+  }
+}
+
+@media only screen and (max-width: 1301px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 10vh;
+  }
+  .clock {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+  }
+  .weather_container {
+    grid-area: 2 / 1 / 3 / 2;
+    display: grid;
+    justify-content: center;
+  }
+  .dog_images {
+    grid-area: 3 / 1 / 4 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dog_images img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+  .weather_container h1 {
+    font-size: 26px;
+  }
+}
