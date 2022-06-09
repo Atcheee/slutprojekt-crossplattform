@@ -4,9 +4,10 @@ const useFetchWeather = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
+  
   useEffect(() => {
     fetch(url)
-      .then((res) => {
+    .then((res) => {
         if (!res.ok) {
           throw Error("An error occurred while fetching, please try again.");
         }
@@ -19,9 +20,10 @@ const useFetchWeather = (url) => {
       .catch((err) => {
         setError(err.message);
       });
-  }, [url]);
-
-  return { data, error };
-};
-
+    }, [url]);
+    
+    console.log(data);
+    return { data, error };
+  };
+  
 export default useFetchWeather;

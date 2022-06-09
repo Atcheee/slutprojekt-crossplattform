@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 
-const statics = self.__WB_MANIFEST
+const statics = self.__WB_MANIFEST;
 
 console.log(statics);
 
@@ -9,7 +9,12 @@ self.addEventListener("install", (event) => {
     caches
       .open("slutproject-cash")
       .then((cache) =>
-        cache.addAll(["/", "index.html", "/static/js/main.4c6dce90.js", "/static/css/main.1f7ac60c.css"])
+        cache.addAll([
+          "/",
+          "index.html",
+          "/static/js/main.cf617aab.js",
+          "/static/css/main.4fadaa36.css",
+        ])
       )
   );
   self.skipWaiting();
@@ -30,4 +35,15 @@ self.addEventListener("fetch", (event) => {
       return fetch(event.request);
     })
   );
+});
+
+self.addEventListener("fetch", (event) => {
+  if (!navigator.onLine) {
+    const markup = "<h1>Seems you are offline!.</h1>";
+    const headers = { "Content-Type": "text/html" };
+    const response = new Response(markup, { headers });
+    event.respondWith(response);
+  } else {
+    event.respondWith(fetch(event.request));
+  }
 });

@@ -20,7 +20,6 @@ const useFetchDogs = (url) => {
         setError(err.message);
       });
   }, [url]);
-  console.log(data);
   return { data, error };
 };
 
