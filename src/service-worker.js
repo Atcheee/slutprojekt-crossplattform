@@ -8,14 +8,14 @@ self.addEventListener("install", (event) => {
       .open("slutproject-cash")
       .then((cache) =>
         cache.addAll([
-          "/",
-          "index.html",
-          "favicon.ico",
-          "logo192.png",
-          "logo512.png",
-          "manifest.json",
-          "/static/js/main.1e65eff4.js",
-          "/static/css/main.505eacba.css",
+          ...statics.map((obj) => obj.url),
+          ...[
+            "/",
+            "favicon.ico",
+            "logo192.png",
+            "logo512.png",
+            "manifest.json",
+          ],
         ])
       )
   );
