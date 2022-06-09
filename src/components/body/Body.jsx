@@ -7,17 +7,14 @@ import Style from "./body.module.css";
 
 function Body({ onlineState }) {
   const { data: weather } = useFetchWeather(
-    "https://api.openweathermap.org/data/2.5/weather?q=Stockholm,se&APPID=11ef9b177cbdb59d6895c31723f02320",
+    process.env.REACT_APP_WEATHERAPI,
     onlineState
   );
   const { data: departure } = useFetchDepartures(
-    "https://api.resrobot.se/v2.1/departureBoard?id=740000002&format=json&accessId=644710bc-1d39-4371-b149-6b7a6f0c9cdd",
+    process.env.REACT_APP_DEPARTUREAPI,
     onlineState
   );
-  const { data: dog } = useFetchDogs(
-    "https://dog.ceo/api/breeds/image/random",
-    onlineState
-  );
+  const { data: dog } = useFetchDogs(process.env.REACT_APP_DOGAPI, onlineState);
 
   const current = new Date();
   const date = `${current.getDate()}/${
