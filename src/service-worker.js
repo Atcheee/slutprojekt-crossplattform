@@ -12,7 +12,9 @@ self.addEventListener("install", (event) => {
         cache.addAll([
           "/",
           "index.html",
-          "/static/js/main.cf617aab.js",
+          "favicon.ico",
+          "manifest.json",
+          "/static/js/main.1a4f71e6.js",
           "/static/css/main.4fadaa36.css",
         ])
       )
@@ -27,23 +29,15 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   console.log("You are requesting ", event.request.url);
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
-      }
-      return fetch(event.request);
-    })
-  );
-});
-
-self.addEventListener("fetch", (event) => {
-  if (!navigator.onLine) {
-    const markup = "<h1>Seems you are offline!.</h1>";
-    const headers = { "Content-Type": "text/html" };
-    const response = new Response(markup, { headers });
-    event.respondWith(response);
-  } else {
-    event.respondWith(fetch(event.request));
+  if (navigator.onLine) {
+    return fetch(event.request);
+  } else if (!navigator.onLine) {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        if (response) {
+          return response;
+        }
+      })
+    );
   }
 });

@@ -27,8 +27,8 @@ function App() {
     <div className="App">
       <div>
         <Header onlineState={onlineState} />
-        <Body />
-        <Footer />
+        <Body onlineState={onlineState} />
+        <Footer onlineState={onlineState} />
       </div>
     </div>
   );
