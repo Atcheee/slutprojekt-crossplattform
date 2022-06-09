@@ -5,7 +5,7 @@ import Body from "./components/body/Body";
 import Footer from "./components/footer/Footer";
 
 function App() {
-  const [onlineState, setOnlineState] = useState(true);
+  const [onlineState, setOnlineState] = useState(navigator.onLine);
 
   useEffect(() => {
     const showOffline = () => {
@@ -26,9 +26,9 @@ function App() {
   return (
     <div className="App">
       <div>
-        <Header onlineState={onlineState} />
+        <Header />
         <Body onlineState={onlineState} />
-        <Footer onlineState={onlineState} />
+        <Footer />
       </div>
     </div>
   );

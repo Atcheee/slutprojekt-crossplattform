@@ -2,8 +2,6 @@
 
 const statics = self.__WB_MANIFEST;
 
-console.log(statics);
-
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
@@ -13,9 +11,11 @@ self.addEventListener("install", (event) => {
           "/",
           "index.html",
           "favicon.ico",
+          "logo192.png",
+          "logo512.png",
           "manifest.json",
-          "/static/js/main.1a4f71e6.js",
-          "/static/css/main.4fadaa36.css",
+          "/static/js/main.1e65eff4.js",
+          "/static/css/main.505eacba.css",
         ])
       )
   );
