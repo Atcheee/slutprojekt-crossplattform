@@ -6,20 +6,25 @@ const useFetchDogs = (url, onlineState) => {
 
   useEffect(() => {
     if (onlineState) {
-      fetch(url)
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("An error occurred while fetching, please try again.");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setData(data);
-          setError(null);
-        })
-        .catch((err) => {
-          setError(err.message);
-        });
+      const intervalID = setInterval(() => {
+        fetch(url)
+          .then((res) => {
+            if (!res.ok) {
+              throw Error(
+                "An error occurred while fetching, please try again."
+              );
+            }
+            return res.json();
+          })
+          .then((data) => {
+            setData(data);
+            setError(null);
+          })
+          .catch((err) => {
+            setError(err.message);
+          });
+      }, 10000);
+      return () => clearInterval(intervalID);
     } else {
       return;
     }

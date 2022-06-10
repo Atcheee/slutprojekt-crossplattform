@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFetchWeather = (url, onlineState) => {
+const useFetchJokes = (url, onlineState) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -27,4 +27,4 @@ const useFetchWeather = (url, onlineState) => {
   return { data, error };
 };
 
-export default useFetchWeather;
+export default useFetchJokes;

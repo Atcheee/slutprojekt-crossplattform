@@ -25,11 +25,9 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <div>
-        <Header />
-        <Body onlineState={onlineState} />
-        <Footer />
-      </div>
+      <Header />
+      <Body onlineState={onlineState} />
+      {/* <Footer /> */}
     </div>
   );
 }

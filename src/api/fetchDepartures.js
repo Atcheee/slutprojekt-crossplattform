@@ -24,7 +24,6 @@ const useFetchDepartures = (url, onlineState) => {
       return;
     }
   }, [url, onlineState]);
-
   return { data, error };
 };
 

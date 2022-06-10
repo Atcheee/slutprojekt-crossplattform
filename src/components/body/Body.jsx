@@ -14,7 +14,13 @@ function Body({ onlineState }) {
     process.env.REACT_APP_DEPARTUREAPI,
     onlineState
   );
+
   const { data: dog } = useFetchDogs(process.env.REACT_APP_DOGAPI, onlineState);
+
+  const { data: joke } = useFetchDogs(
+    process.env.REACT_APP_JOKEAPI,
+    onlineState
+  );
 
   const current = new Date();
   const date = `${current.getDate()}/${
@@ -24,20 +30,38 @@ function Body({ onlineState }) {
   return (
     <div className={Style.wrapper}>
       <div className={Style.clock}>
-        <h1 className={Style.clock_timer}>
-          <Clock />
-        </h1>
+        <div className={Style.clock_timer}>
+          <h1>
+            <Clock />
+          </h1>
+          <h3>{date}</h3>
+        </div>
       </div>
       <div className={Style.weather_container}>
-        <h1> City: {weather && weather.name} </h1>
+        <h1> CITY: {weather && weather.name.toUpperCase()} </h1>
         <h1>
           {" "}
-          Weather Description: {weather && weather.weather[0].description}{" "}
+          WEATHER DESCRIPTION:{" "}
+          {weather && weather.weather[0].description.toUpperCase()}{" "}
         </h1>
-        <h1> Temp: {weather && Math.floor(weather.main.temp - 273.15)}° </h1>
+        <h1> TEMP: {weather && Math.floor(weather.main.temp - 273.15)}° </h1>
+        <h2>
+          {" "}
+          MIN-TEMP: {weather &&
+            Math.floor(weather.main.temp_min - 273.15)}°{" "}
+        </h2>
+        <h2>
+          {" "}
+          MIN-TEMP: {weather &&
+            Math.floor(weather.main.temp_max - 273.15)}°{" "}
+        </h2>
       </div>
       <div className={Style.dog_images}>
         <img src={dog && dog.message} alt="Random dog" />
+      </div>
+      <div className={Style.jokes}>
+        <h1>Chuck Norris Quote: </h1>
+        <h2>{joke}</h2>
       </div>
     </div>
   );
