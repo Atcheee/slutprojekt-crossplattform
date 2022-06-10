@@ -57,7 +57,7 @@ function Body({ onlineState }) {
         </h2>
       </div>
       <div className={Style.dog_images}>
-        <img src={dog && dog.message} alt="Random dog" />
+        <img src={dog && dog.message} alt="Please wait 10s for a image to appear :D" />
       </div>
       <div className={Style.jokes}>
         <h1>Chuck Norris Quote: </h1>
