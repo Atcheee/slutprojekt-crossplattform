@@ -1,24 +1,30 @@
 import React from "react";
-import useFetchWeather from "../../api/fetchWeather";
-import useFetchDepartures from "../../api/fetchDepartures";
-import useFetchDogs from "../../api/fetchDogs";
+import useFetchData from "../../api/fetchData";
+import useFetchDataInterval from "../../api/fetchDataInterval";
+import useFetchDadJoke from "../../api/fetchDadJoke";
+import useFetchRandomFact from "../../api/fetchRandomFact";
 import Clock from "./clock/Clock";
 import Style from "./body.module.css";
 
 function Body({ onlineState }) {
-  const { data: weather } = useFetchWeather(
+  const { data: dog } = useFetchDataInterval(
+    process.env.REACT_APP_DOGAPI,
+    onlineState
+  );
+  const { data: weather } = useFetchData(
     process.env.REACT_APP_WEATHERAPI,
     onlineState
   );
-  const { data: departure } = useFetchDepartures(
-    process.env.REACT_APP_DEPARTUREAPI,
+  const { data: joke } = useFetchDataInterval(
+    process.env.REACT_APP_JOKEAPI,
     onlineState
   );
-
-  const { data: dog } = useFetchDogs(process.env.REACT_APP_DOGAPI, onlineState);
-
-  const { data: joke } = useFetchDogs(
-    process.env.REACT_APP_JOKEAPI,
+  const { data: dadjoke } = useFetchDadJoke(
+    process.env.REACT_APP_DADJOKEAPI,
+    onlineState
+  );
+  const { data: fact } = useFetchRandomFact(
+    process.env.REACT_APP_RANDOMFACT,
     onlineState
   );
 
@@ -57,11 +63,18 @@ function Body({ onlineState }) {
         </h2>
       </div>
       <div className={Style.dog_images}>
-        <img src={dog && dog.message} alt="Please wait 10s for a image to appear :D" />
+        <img
+          src={dog && dog.message}
+          alt="Please wait 10s for a image to appear :D"
+        />
       </div>
       <div className={Style.jokes}>
-        <h1>Chuck Norris Quote: </h1>
-        <h2>{joke}</h2>
+        <h1>Random Fact: </h1>
+        <h2>{fact && fact[0].fact}</h2>
+      </div>
+      <div className={Style.dad_joke}>
+        <h1>Driest Dad Joke Imaginable:</h1>
+        <h2>{dadjoke && dadjoke.joke}</h2>
       </div>
     </div>
   );

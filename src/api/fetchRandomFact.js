@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 
-const useFetchDogs = (url, onlineState) => {
+const useFetchRandomFact = (url, onlineState) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (onlineState) {
       const intervalID = setInterval(() => {
-        fetch(url)
+        const config = {
+          headers: {
+            "X-Api-Key": "wTBZcZjsgk8Ho/44OsSCXw==oZ131zLx4k4nq6S4",
+          },
+        };
+        fetch(url, config)
           .then((res) => {
             if (!res.ok) {
               throw Error(
@@ -32,4 +37,4 @@ const useFetchDogs = (url, onlineState) => {
   return { data, error };
 };
 
-export default useFetchDogs;
+export default useFetchRandomFact;
