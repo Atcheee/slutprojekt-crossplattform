@@ -71,7 +71,7 @@ function Body({ onlineState }) {
           />
         )}
       </div>
-      <div className={Style.jokes}>
+      <div className={Style.fact}>
         <h1>Random Fact: </h1>
         <h2>{fact && fact[0].fact}</h2>
       </div>
