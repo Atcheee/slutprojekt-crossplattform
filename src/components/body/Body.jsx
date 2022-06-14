@@ -1,8 +1,8 @@
 import React from "react";
-import useFetchData from "../../api/fetchData";
-import useFetchDataInterval from "../../api/fetchDataInterval";
-import useFetchDadJoke from "../../api/fetchDadJoke";
-import useFetchRandomFact from "../../api/fetchRandomFact";
+import useFetchData from "../../hooks/fetchData";
+import useFetchDataInterval from "../../hooks/fetchDataInterval";
+import useFetchDadJoke from "../../hooks/fetchDadJoke";
+import useFetchRandomFact from "../../hooks/fetchRandomFact";
 import Clock from "./clock/Clock";
 import Style from "./body.module.css";
 
@@ -13,6 +13,10 @@ function Body({ onlineState }) {
   );
   const { data: weather } = useFetchData(
     process.env.REACT_APP_WEATHERAPI,
+    onlineState
+  );
+  const { data: departure } = useFetchData(
+    process.env.REACT_APP_DEPARTURE,
     onlineState
   );
   const { data: dadjoke } = useFetchDadJoke(
@@ -78,6 +82,9 @@ function Body({ onlineState }) {
       <div className={Style.dad_joke}>
         <h1>Driest Dad Joke Imaginable:</h1>
         <h2>{dadjoke && dadjoke.joke}</h2>
+      </div>
+      <div className={Style.departure}>
+        <h2>Nearest station: {departure && departure.Departure[0].stop}</h2>
       </div>
     </div>
   );

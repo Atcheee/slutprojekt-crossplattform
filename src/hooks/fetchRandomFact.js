@@ -7,7 +7,7 @@ const useFetchRandomFact = (url, onlineState) => {
   function fetchDataFunction() {
     const config = {
       headers: {
-        "X-Api-Key": "wTBZcZjsgk8Ho/44OsSCXw==oZ131zLx4k4nq6S4",
+        "X-Api-Key": process.env.REACT_APP_APIKEY,
       },
     };
     fetch(url, config)

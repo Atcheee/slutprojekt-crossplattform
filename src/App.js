@@ -2,7 +2,6 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Header from "./components/header/Header";
 import Body from "./components/body/Body";
-import Footer from "./components/footer/Footer";
 
 function App() {
   const [onlineState, setOnlineState] = useState(navigator.onLine);
@@ -27,7 +26,6 @@ function App() {
     <div className="App">
       <Header />
       <Body onlineState={onlineState} />
-      {/* <Footer /> */}
     </div>
   );
 }
