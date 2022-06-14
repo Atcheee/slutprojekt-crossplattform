@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFetchDepartures = (url, onlineState) => {
+const useFetchData = (url, onlineState) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -27,4 +27,4 @@ const useFetchDepartures = (url, onlineState) => {
   return { data, error };
 };
 
-export default useFetchDepartures;
+export default useFetchData;

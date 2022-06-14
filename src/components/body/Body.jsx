@@ -15,10 +15,6 @@ function Body({ onlineState }) {
     process.env.REACT_APP_WEATHERAPI,
     onlineState
   );
-  const { data: joke } = useFetchDataInterval(
-    process.env.REACT_APP_JOKEAPI,
-    onlineState
-  );
   const { data: dadjoke } = useFetchDadJoke(
     process.env.REACT_APP_DADJOKEAPI,
     onlineState
@@ -63,10 +59,17 @@ function Body({ onlineState }) {
         </h2>
       </div>
       <div className={Style.dog_images}>
-        <img
-          src={dog && dog.message}
-          alt="Please wait 10s for a image to appear :D"
-        />
+        {onlineState ? (
+          <img
+            src={dog && dog.message}
+            alt="Please wait 10s for a image to appear :D"
+          />
+        ) : (
+          <img
+            src={dog && dog.message}
+            alt="Connect to internet to be able to view this image!"
+          />
+        )}
       </div>
       <div className={Style.jokes}>
         <h1>Random Fact: </h1>
