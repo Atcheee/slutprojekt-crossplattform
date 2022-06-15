@@ -4,6 +4,7 @@ import useFetchDataInterval from "../../hooks/fetchDataInterval";
 import useFetchDadJoke from "../../hooks/fetchDadJoke";
 import useFetchRandomFact from "../../hooks/fetchRandomFact";
 import Clock from "./clock/Clock";
+import Departure from "../departure/departure";
 import Style from "./body.module.css";
 
 function Body({ onlineState }) {
@@ -13,10 +14,6 @@ function Body({ onlineState }) {
   );
   const { data: weather } = useFetchData(
     process.env.REACT_APP_WEATHERAPI,
-    onlineState
-  );
-  const { data: departure } = useFetchData(
-    process.env.REACT_APP_DEPARTURE,
     onlineState
   );
   const { data: dadjoke } = useFetchDadJoke(
@@ -43,49 +40,61 @@ function Body({ onlineState }) {
           <h3>{date}</h3>
         </div>
       </div>
-      <div className={Style.weather_container}>
-        <h1> CITY: {weather && weather.name.toUpperCase()} </h1>
+      {onlineState ? (
+        <>
+          <div className={Style.weather_container}>
+            <h1> CITY: {weather && weather.name.toUpperCase()} </h1>
+            <h1>
+              {" "}
+              WEATHER DESCRIPTION:{" "}
+              {weather && weather.weather[0].description.toUpperCase()}{" "}
+            </h1>
+            <h1>
+              {" "}
+              TEMP: {weather && Math.floor(weather.main.temp - 273.15)}°{" "}
+            </h1>
+            <h2>
+              {" "}
+              MIN-TEMP: {weather &&
+                Math.floor(weather.main.temp_min - 273.15)}°{" "}
+            </h2>
+            <h2>
+              {" "}
+              MIN-TEMP: {weather &&
+                Math.floor(weather.main.temp_max - 273.15)}°{" "}
+            </h2>
+          </div>
+          <div className={Style.dog_images}>
+            {onlineState ? (
+              <img
+                src={dog && dog.message}
+                alt="Please wait 10s for a image to appear :D"
+              />
+            ) : (
+              <img
+                src={dog && dog.message}
+                alt="Connect to internet to be able to view this image!"
+              />
+            )}
+          </div>
+          <div className={Style.fact}>
+            <h1>Random Fact: </h1>
+            <h2>{fact && fact[0].fact}</h2>
+          </div>
+          <div className={Style.departure}>
+            <Departure onlineState={onlineState} />
+          </div>
+          <div className={Style.dad_joke}>
+            <h1>Driest Dad Joke Imaginable:</h1>
+            <h2>{dadjoke && dadjoke.joke}</h2>
+          </div>
+        </>
+      ) : (
         <h1>
-          {" "}
-          WEATHER DESCRIPTION:{" "}
-          {weather && weather.weather[0].description.toUpperCase()}{" "}
+          Please go online by connecting to a network if you want the full
+          experience of this website!
         </h1>
-        <h1> TEMP: {weather && Math.floor(weather.main.temp - 273.15)}° </h1>
-        <h2>
-          {" "}
-          MIN-TEMP: {weather &&
-            Math.floor(weather.main.temp_min - 273.15)}°{" "}
-        </h2>
-        <h2>
-          {" "}
-          MIN-TEMP: {weather &&
-            Math.floor(weather.main.temp_max - 273.15)}°{" "}
-        </h2>
-      </div>
-      <div className={Style.dog_images}>
-        {onlineState ? (
-          <img
-            src={dog && dog.message}
-            alt="Please wait 10s for a image to appear :D"
-          />
-        ) : (
-          <img
-            src={dog && dog.message}
-            alt="Connect to internet to be able to view this image!"
-          />
-        )}
-      </div>
-      <div className={Style.fact}>
-        <h1>Random Fact: </h1>
-        <h2>{fact && fact[0].fact}</h2>
-      </div>
-      <div className={Style.dad_joke}>
-        <h1>Driest Dad Joke Imaginable:</h1>
-        <h2>{dadjoke && dadjoke.joke}</h2>
-      </div>
-      <div className={Style.departure}>
-        <h2>Nearest station: {departure && departure.Departure[0].stop}</h2>
-      </div>
+      )}
     </div>
   );
 }
